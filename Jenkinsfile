@@ -28,7 +28,7 @@ stages {
  }
  stage('Push (Docker Hub)') {
  steps {
- withCredentials([usernamePassword(credentialsId: 'docker_id',
+ withCredentials([usernamePassword(credentialsId: 'cred',
  usernameVariable: 'USER',
 passwordVariable: 'PASS')]) {
  bat """
