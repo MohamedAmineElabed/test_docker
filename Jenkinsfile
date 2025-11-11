@@ -2,7 +2,7 @@ pipeline {
  agent any
  options { timestamps() }
  environment {
- IMAGE = 'zayneeb/monapp'
+ IMAGE = 'mohamedamineelabed/myapp'
  TAG = "build-${env.BUILD_NUMBER}"
  }
 stages {
@@ -18,8 +18,8 @@ stages {
  stage('Smoke Test') {
  steps {
  bat """
- docker rm -f monapp_test 2>nul || ver > nul
- docker run -d --name monapp_test -p 8081:80 %IMAGE%:%TAG%
+ docker rm -f myapp 2>nul || ver > nul
+ docker run -d --name myapp -p 8082:80 %IMAGE%:%TAG%
  ping -n 3 127.0.0.1 > nul
  curl -I http://localhost:8081 | find "200 OK"
  docker rm -f monapp_test
@@ -28,7 +28,7 @@ stages {
  }
  stage('Push (Docker Hub)') {
  steps {
- withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
+ withCredentials([usernamePassword(credentialsId: 'docker_id',
  usernameVariable: 'USER',
 passwordVariable: 'PASS')]) {
  bat """
