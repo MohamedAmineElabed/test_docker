@@ -22,7 +22,7 @@ stages {
  docker run -d --name myapp -p 8082:80 %IMAGE%:%TAG%
  ping -n 3 127.0.0.1 > nul
  curl -I http://localhost:8081 | find "200 OK"
- docker rm -f monapp_test
+ docker rm -f myapp
  """
  }
  }
